@@ -1,68 +1,67 @@
-<!-- PROJECT LOGO -->
-# RockPaperScissors – Kéo Búa Bao Online
+# RockPaperScissors – Kéo Búa Bao Realtime
 
-Ứng dụng chơi **Kéo – Búa – Bao** realtime hai người chơi, xây dựng với React (Vite) và Socket.IO. Người dùng có thể tạo/phòng, mời bạn bè bằng mã chia sẻ, theo dõi điểm số theo vòng và thi đấu đến khi đạt 3 điểm.
+Trải nghiệm trò chơi **Kéo – Búa – Bao** trực tuyến dành cho 2 người với giao diện hiện đại, hiệu ứng glassmorphism và kết nối Socket.IO thời gian thực. Dự án gồm hai phần: client React/Vite và server Node.js/Express.
 
 ---
 
-## ✨ Tính năng chính
-- **Đa phiên chơi**: tạo phòng riêng với mã ngẫu nhiên, giới hạn 2 người chơi để đảm bảo công bằng.
-- **Cập nhật thời gian thực**: đồng bộ trạng thái phòng, lựa chọn, kết quả mỗi vòng qua Socket.IO.
-- **Đồng hồ đếm ngược thông minh**: tự chốt kết quả nếu hết 30 giây và gán lựa chọn ngẫu nhiên cho người chơi chưa chọn.
-- **Điểm & vòng**: theo dõi điểm từng người, thông báo thắng/thua, cho phép chuyển tiếp vòng ngay trong giao diện.
-- **Giao diện tiếng Việt**: thiết kế tối giản, dễ thao tác trên cả desktop và thiết bị màn hình lớn.
+## 🔥 Điểm nổi bật
+- **Giao diện hiện đại**: nền gradient, thẻ mờ (glassmorphism), nút gradient động và typography rõ ràng.
+- **Chơi cùng bạn bè tức thì**: tạo phòng riêng với mã ngẫu nhiên, gửi mã cho bạn bè để tham gia.
+- **Đồng bộ thời gian thực**: biến động phòng, lựa chọn, bộ đếm thời gian được cập nhật lập tức qua Socket.IO.
+- **Quản lý vòng đấu thông minh**: tự động gán lựa chọn nếu người chơi hết 30 giây, tính điểm, công bố người thắng khi đạt 3 điểm.
+- **Tiếng Việt thân thiện**: toàn bộ nội dung UI và thông báo đều được Việt hóa.
 
 ---
 
 ## 🧱 Kiến trúc & công nghệ
-| Thành phần | Công nghệ | Vai trò |
-|------------|-----------|---------|
-| `client/`  | React 19, Vite 7, Socket.IO Client | Giao diện, quản lý trạng thái UI, kết nối realtime |
-| `server/`  | Node.js, Express 5, Socket.IO 4, Nodemon | API và Socket server, điều phối game |
-| Chung      | npm, ESLint | Quản lý package và linting |
+| Thư mục | Công nghệ chính | Vai trò |
+|---------|-----------------|---------|
+| `client/` | React 19, Vite 7, Socket.IO Client | Giao diện, quản lý state, kết nối realtime |
+| `server/` | Node.js, Express 5, Socket.IO 4, Nodemon | API/socket server, điều phối phòng & vòng chơi |
+| Chung | npm, ESLint | Quản lý package, linting |
 
 ---
 
-## 📁 Cấu trúc thư mục nổi bật
+## 📁 Cấu trúc thư mục
 ```
 RockPaperScissors/
-├─ client/           # Ứng dụng React
+├─ client/                 # Ứng dụng React
 │  ├─ src/
-│  │  ├─ components/ # NameForm, ActionSelector, GameRoom, GamePlaying, ...
-│  │  ├─ App.jsx     # Điều phối luồng game và kết nối socket
-│  │  └─ App.css     # Styling chính (giao diện tiếng Việt)
-│  └─ vite.config.js # Cấu hình Vite
-├─ server/
-│  ├─ index.js       # Socket server, lưu trữ state phòng & vòng chơi
+│  │  ├─ components/       # NameForm, ActionSelector, GameRoom, GamePlaying...
+│  │  ├─ App.jsx           # Điều phối luồng chơi, kết nối socket
+│  │  └─ App.css           # Toàn bộ styling glassmorphism mới
+│  ├─ public/
+│  └─ vite.config.js
+├─ server/                 # Socket server
+│  ├─ index.js             # Logic phòng, điểm, timer
 │  └─ package.json
-└─ README.md         # Tài liệu dự án
+└─ README.md
 ```
 
 ---
 
 ## 🚀 Bắt đầu
-
 ### 1. Yêu cầu hệ thống
-- Node.js >= 18
-- npm >= 9
-- Cổng `5173` (client) và `3001` (server) trống trên máy.
+- Node.js ≥ 18
+- npm ≥ 9
+- Cổng `5173` (client) và `3001` (server) đang trống
 
 ### 2. Cài đặt
 ```bash
 git clone <repository-url>
 cd RockPaperScissors
 
-# Cài đặt client
+# Cài client
 cd client
 npm install
 
-# Cài đặt server
+# Cài server
 cd ../server
 npm install
 ```
 
-### 3. Chạy ứng dụng
-Mở hai terminal:
+### 3. Chạy dự án
+Mở hai terminal riêng:
 ```bash
 # Terminal 1 – Server (cổng 3001)
 cd server
@@ -72,38 +71,39 @@ npm start
 cd client
 npm run dev
 ```
-Vite sẽ cung cấp URL: `http://localhost:5173`. Truy cập đường dẫn đó để bắt đầu chơi.
+Truy cập `http://localhost:5173` để trải nghiệm trò chơi.
 
 ---
 
 ## 🕹️ Luồng gameplay
-1. **Nhập tên**: người chơi nhập tên hiển thị (ảnh 1).
-2. **Tạo hoặc vào phòng**: chủ phòng nhận mã mời, người còn lại nhập mã để tham gia (ảnh 2, 3, 4).
-3. **Bắt đầu trận**: khi đủ 2 người, chủ phòng khởi động trò chơi (ảnh 5).
-4. **Thi đấu theo vòng**: mỗi vòng 30 giây để chọn Kéo/Búa/Bao; kết quả và điểm hiển thị tức thì (ảnh 6–8).
-5. **Điểm chiến thắng**: người đầu tiên đạt 3 điểm được tuyên bố thắng, có thể rời phòng hoặc chơi tiếp.
+1. **Nhập tên hiển thị**: màn chào sử dụng thẻ glass card và nút gradient.  
+2. **Chọn hành động**: tạo phòng mới hoặc nhập mã để tham gia phòng có sẵn.  
+3. **Chờ đủ 2 người**: danh sách người chơi, phân biệt chủ phòng và hướng dẫn chia sẻ mã.  
+4. **Thi đấu vòng**: mỗi vòng có timer 30 giây, hiển thị lựa chọn bằng emoji, bảng điểm realtime.  
+5. **Kết thúc trận**: người đầu tiên đạt 3 điểm sẽ thắng, có thể thoát hoặc tiếp tục vòng mới.
 
-> _Lưu ý_: Các ảnh minh họa kèm theo request của bạn phản ánh đúng giao diện mặc định của dự án.
-
----
-
-## 🧪 Phát triển & đóng góp
-- Dự án chưa có bộ test tự động; khi chỉnh sửa nên chạy `npm run lint` trong `client/`.
-- Nếu mở rộng luật chơi hoặc bổ sung bot, cân nhắc trừu tượng hóa `determineWinner` trong `server/index.js:31`.
-- Mã hóa tiếng Việt cần đảm bảo file ở dạng UTF-8 để tránh lỗi ký tự.
+> Hình ảnh UI minh họa đã được cung cấp trong yêu cầu trước, phản ánh giao diện hiện hành.
 
 ---
 
-## ❓ Troubleshooting
-- **Trang trắng khi chạy client**: kiểm tra `client/index.html` có phần tử `<div id="root"></div>` và script Vite hay không.
-- **Không kết nối được server**: đảm bảo đã chạy `npm start` trong thư mục `server` và không có ứng dụng khác chiếm cổng 3001.
-- **Socket disconnect liên tục**: xác minh firewall không chặn `localhost` hoặc Socket.IO; thử mở với quyền Administrator.
+## 🛠️ Dành cho nhà phát triển
+- Chạy `npm run lint` trong `client/` trước khi commit để đảm bảo chất lượng mã.
+- Logic xác định thắng/thua nằm ở `server/index.js` (`determineWinner`); có thể mở rộng nếu muốn bổ sung luật mới hoặc chơi nhiều người.
+- Khi chỉnh sửa giao diện, giữ nguyên stylesheet `App.css` để đảm bảo trải nghiệm nhất quán.
+- Dự án chưa có test tự động; cân nhắc bổ sung Jest/Vitest cho client và server nếu triển khai thực tế.
 
 ---
 
-## 📜 Giấy phép
-Dự án dành cho mục đích học tập. Bổ sung giấy phép chính thức (MIT, Apache 2.0, ...) theo nhu cầu của bạn.
+## ❗ Troubleshooting
+- **Trang trắng ở client**: kiểm tra `client/index.html` có phần tử `<div id="root"></div>` và Vite đang chạy (`npm run dev`).  
+- **Không kết nối được server**: chắc chắn `npm start` trong `server/` đang chạy và không có ứng dụng khác chiếm cổng 3001.  
+- **Bị ngắt kết nối Socket.IO**: kiểm tra firewall hoặc các tiện ích chặn localhost.
 
 ---
 
-Chúc bạn chơi vui và dễ dàng mở rộng trò chơi Kéo Búa Bao cho bạn bè! 🎮
+## 📄 Giấy phép
+Dự án phục vụ mục đích học tập. Thêm giấy phép chính thức (MIT, Apache 2.0, ...) nếu bạn muốn công bố rộng rãi.
+
+---
+
+Chúc bạn chơi vui và dễ dàng mời bạn bè thách đấu Kéo Búa Bao! 🎮
